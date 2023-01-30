@@ -11,13 +11,18 @@ import numpy as np
 # cv2.imshow('Photo', photo)
 # cv2.waitKey(0)
 
-cap = cv2.VideoCapture("film/video.mp4")
-cap.set(3, 500)
-cap.set(4, 300)
 
-while True:
-    success, img = cap.read()
-    cv2.imshow('Result', img)
+img = cv2.imread("images/my_photo.png")
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+img = cv2.cvtColor(img, cv2.COLOR_HSV2RGB)
+
+r,g,b = cv2.split(img)
+
+img = cv2.merge([g])
+
+
+
+cv2.imshow('result', img)
+cv2.waitKey(0)
